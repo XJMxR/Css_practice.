@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div id =fuente class="encabezado">
+        <h1 class="Titulo"><b>PAGINA DE PRACTICAS<b></h1>
+        <h2 class="subtitulo">practicando lo que no hice en clases</h2>
+    </div>
+    <div clase ="rejillas">
+        <div class="uno">Uno
+            <h1 id ="valor" class="Valor_text" >0</h1>
+            <button id="Aumentar" onclick="aum()">Aumentar</button>
+            <button id="Disminuir" onclick="dis()">Disminuir</button>
+        </div>
+        <div id="fuente" class="dos">Dos   
+        <img src="cool-.gif" alt="spiral">
+        </div> 
+  
+    </div>
+    <div id="fuente" id="visualizador" class="tres">Tres   
+
+    </div> 
+    <style>
+        body{
+            background-color: rgb(37, 37, 37);
+            color: rgb(255, 255, 255);
+
+            justify-content: center;
+            display:grid;
+        }
+        .encabezado{
+            text-align: center;
+            align-content: center;
+            color: rgb(0, 0, 0);
+            background-color: rgb(255, 217, 0);
+            border: 50px solid rgba(255, 255, 255, 0);
+            border-radius: 4px;
+            width: 412px;
+            align-content: center;
+        }
+        img {
+            border-radius: 4px;
+            padding: 5px;
+            width: 500px;
+            }
+        .regillas {
+            align-content: start;
+            align-content: baseline;
+            grid-gap: 10px;
+            grid-auto-rows: minmax(100px, auto);
+            
+        }
+        .uno {
+            border: 1px solid #ddd;
+            text-align: center;
+            border-radius: 4px;
+            padding: 5px;
+            width: 500px;
+            height:405px; 
+            align-items: center;
+        }
+        .dos {
+            border: 1px solid #ddd;
+            text-align: center;
+            border-radius: 4px;
+            padding: 5px;
+            width: 500px;
+            height:415px; 
+            
+        }
+        .tres {
+            border: 1px solid #ddd;
+            text-align: center;
+            border-radius: 4px;
+            padding: 5px;
+            width: 500px;
+            height:405px; 
+        }
+        button{
+            width: 100px;
+            height:20px;
+            background-color: rgb(37, 37, 37); 
+            border-color: rgb(71, 71, 71);
+            color: rgb(255, 255, 255);
+            border-radius: 12px;
+        }
+        @font-face {
+            font-family:"PUNK  KID" ;
+            src: url(punkkid.ttf);
+        }
+        #fuente{
+            font-family:"PUNK KID";
+            font-size: 24px;
+        }
+
+    </style>
+    <script >
+        var valor=0;
+
+        function aum ()
+        {   if (valor <10){
+            valor = valor + 1;
+            document.getElementById("valor").textContent =valor;
+            }
+
+        }
+        function dis ()
+        {
+            if (valor >0){
+            valor = valor - 1;
+            document.getElementById("valor").textContent =valor;
+            }
+        }
+    </script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/loaders/OBJLoader.min.js"></script>
+     <script>
+        // Crear una escena
+        var scene = new THREE.Scene();
+        
+        // Crear una cámara
+        var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 5;
+        
+        // Crear un renderizador
+        var renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('visualizador').appendChild(renderer.domElement);
+        
+        // Cargar el modelo OBJ
+        var loader = new THREE.OBJLoader();
+        loader.load(
+            'abstract_pyramid.obj', // Ruta al archivo OBJ
+            function (object) { // Callback llamado cuando la carga está completada
+                // Agregar el modelo a la escena
+                scene.add(object);
+            },
+            function (xhr) { // Función de progreso (opcional)
+                console.log((xhr.loaded / xhr.total * 100) + '% cargado');
+            },
+            function (error) { // Función de manejo de errores (opcional)
+                console.error('Error al cargar el modelo OBJ', error);
+            }
+        );
+
+        // Animar la escena
+        function animate() {
+            requestAnimationFrame(animate);
+            renderer.render(scene, camera);
+        }
+        animate();
+    </script>
+
+</body>
+</html>
